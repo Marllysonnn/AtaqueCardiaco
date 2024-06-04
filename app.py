@@ -34,16 +34,16 @@ def prever():
     
     try:
         # Adicione mensagens de depuração para verificar os dados recebidos
-        print("Dados recebidos:", dados['dor'])
+        print("Dados recebidos:", dados)
 
 
         idade = dados['idade']
         sexo = dados['sexo']
-        tipo_dor_toracica = dados['dor']
-        pressao_arterial = dados['press_arterial']
+        tipo_dor_toracica = dados['tipo_dor_toracica']
+        pressao_arterial = dados['pressao_arterial']
         colesterol = dados['colesterol']
-        acucar_sanguineo = dados['glicose']
-        resultados_eletrocardiograficos = dados['eletrocardio']
+        acucar_sanguineo = dados['acucar_sanguineo']
+        resultados_eletrocardiograficos = dados['resultados_eletrocardiograficos']
 
         dados_de_entrada = [[
             idade, sexo, tipo_dor_toracica, pressao_arterial, colesterol,
