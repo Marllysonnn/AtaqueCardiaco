@@ -1,4 +1,3 @@
-import random
 from flask import Flask, request, jsonify, render_template
 import pickle
 import pandas as pd
@@ -7,7 +6,7 @@ import traceback
 app = Flask(__name__)
 
 try:
-    with open('Treinamento/data/modelo_treinado.pkl', 'rb') as f:
+    with open('Treinamento/data/heart_model.pkl', 'rb') as f:
         modelo = pickle.load(f)
 except Exception as e:
     print(f"Erro ao carregar o modelo: {e}")
@@ -31,33 +30,36 @@ def prever():
     if modelo is None:
         return jsonify({'erro': 'Modelo não está disponível'}), 500
     
-    dados = request.get_json(force=True)
+    dados = request.json  # Use request.json diretamente para obter os dados JSON
     
     try:
+        # Adicione mensagens de depuração para verificar os dados recebidos
+        print("Dados recebidos:", dados['dor'])
+
+
         idade = dados['idade']
         sexo = dados['sexo']
-        pressao_arterial = dados['pressao_arterial']
+        tipo_dor_toracica = dados['dor']
+        pressao_arterial = dados['press_arterial']
         colesterol = dados['colesterol']
-        resultados_eletrocardiograficos = dados['resultados_eletrocardiograficos']
-        acucar_sanguineo = dados['acucar_sanguineo']
-        tipo_dor_toracica = dados['tipo_dor_toracica']
-        
-        frequencia_cardiaca_maxima = random.randint(80, 200)
-        angina_exercicio = random.choice([0, 1])
-        depressao_exercicio = round(random.uniform(0.0, 4.0), 1)
-        inclincao_ST = random.choice([0, 1, 2])
-        numero_vasos_coloridos = random.choice([0, 1, 2])
-        thal = random.choice([0, 1, 2, 3])
+        acucar_sanguineo = dados['glicose']
+        resultados_eletrocardiograficos = dados['eletrocardio']
 
         dados_de_entrada = [[
             idade, sexo, tipo_dor_toracica, pressao_arterial, colesterol,
-            acucar_sanguineo, resultados_eletrocardiograficos, frequencia_cardiaca_maxima,
-            angina_exercicio, depressao_exercicio, inclincao_ST, numero_vasos_coloridos, thal
+            acucar_sanguineo, resultados_eletrocardiograficos,
         ]]
         
         previsao = modelo.predict(dados_de_entrada)
+
+        # Adicione mensagens de depuração para verificar a previsão
+        print("Previsão:", previsao)
+
         return jsonify({'previsao': int(previsao[0])})
     except Exception as e:
+        # Adicione mensagens de depuração para verificar qualquer erro
+        print("Erro ao processar a previsão:", e)
+
         return jsonify({'erro': f'Erro ao processar a previsão: {e}'}), 500
 
 @app.route('/heart', methods=['GET'])
@@ -102,18 +104,15 @@ def dados_histograma():
 @app.route('/dados_venn', methods=['GET'])
 def dados_venn():
     try:
-        # Calculating the percentage of each condition
         total_records = len(heart_normalizacao)
         dor_tipo_2_count = len(heart_normalizacao[heart_normalizacao['dor'] == 1.0])
         diabetes_count = len(heart_normalizacao[heart_normalizacao['eletrocardio'] == 0.5])
         ambos_count = len(heart_normalizacao[(heart_normalizacao['dor'] == 1.0) & (heart_normalizacao['eletrocardio'] == 0.5)])
 
-        # Calculate the percentage of each condition
         dor_tipo_2_percentage = (dor_tipo_2_count / total_records) * 100
         diabetes_percentage = (diabetes_count / total_records) * 100
         ambos_percentage = (ambos_count / total_records) * 100
 
-        # Return data in JSON format
         data = [
             {"name": "Dor Tipo 2", "value": dor_tipo_2_percentage},
             {"name": "Diabetes", "value": diabetes_percentage},

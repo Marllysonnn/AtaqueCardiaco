@@ -8,6 +8,16 @@ document.getElementById("preverForm").addEventListener("submit", async function 
     const resultados_eletrocardiograficos = document.getElementById("eletro").value;
     const acucar_sanguineo = document.getElementById("acucar").value;
     const tipo_dor_toracica = document.getElementById("dor").value;
+    
+    console.log({
+        idade: idade,
+        sexo: sexo,
+        tipo_dor_toracica: tipo_dor_toracica,
+        pressao_arterial: pressao_arterial,
+        colesterol: colesterol,
+        resultados_eletrocardiograficos: resultados_eletrocardiograficos,
+        acucar_sanguineo: acucar_sanguineo,
+    });
 
     const response = await fetch("/prever", {
         method: "POST",
@@ -17,12 +27,13 @@ document.getElementById("preverForm").addEventListener("submit", async function 
         body: JSON.stringify({
             idade: Number(idade),
             sexo: Number(sexo),
+            tipo_dor_toracica: Number(tipo_dor_toracica),
             pressao_arterial: Number(pressao_arterial),
             colesterol: Number(colesterol),
             resultados_eletrocardiograficos: Number(resultados_eletrocardiograficos),
             acucar_sanguineo: Number(acucar_sanguineo),
-            tipo_dor_toracica: Number(tipo_dor_toracica),
         }),
+    
     });
 
     const mais = document.getElementById("mais");
