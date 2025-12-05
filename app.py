@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import pickle
 import pandas as pd
 import traceback
+import os
 
 app = Flask(__name__)
 
@@ -133,6 +134,3 @@ def dados_venn():
 def home():
     return render_template('index.html')
 
-@app.route('/')
-def home():
-    return render_template('index.html')
