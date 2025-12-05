@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, render_template, request, jsonify
 import pickle
 import pandas as pd
 import traceback
@@ -130,7 +130,11 @@ def dados_venn():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
+
+@app.route("/api/test")
+def test():
+    return jsonify({"status": "ok"})
 
