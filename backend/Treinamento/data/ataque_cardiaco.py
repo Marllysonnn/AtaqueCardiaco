@@ -46,7 +46,7 @@ import pandas as pd
 heart = pd.read_csv('heart.csv')
 heart.head()
 
-heart.tail()
+heart.tail() 
 
 heart.shape
 

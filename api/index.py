@@ -1,4 +1,5 @@
-from app import app
+from backend.app import app
 
 def handler(request):
     return app(request)
+   

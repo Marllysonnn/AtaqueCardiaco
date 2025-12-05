@@ -12,7 +12,7 @@ am5.ready(async function() {
   const chartData = [
       { category: 'Homem', value: data.Homem },
       { category: 'Mulher', value: data.Mulher }
-  ];
+  ]; 
 
   // Create root element
   var root = am5.Root.new("chartpizza");

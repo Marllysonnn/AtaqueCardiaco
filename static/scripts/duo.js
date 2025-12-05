@@ -9,7 +9,7 @@ am5.ready(function() {
   ]);
 
   root.container.set("layout", root.verticalLayout);
-
+ 
   // Create container to hold charts
   var chartContainer = root.container.children.push(am5.Container.new(root, {
     layout: root.horizontalLayout,

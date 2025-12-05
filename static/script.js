@@ -8,7 +8,7 @@ document.getElementById("preverForm").addEventListener("submit", async function 
     const resultados_eletrocardiograficos = document.getElementById("eletro").value;
     const acucar_sanguineo = document.getElementById("acucar").value;
     const tipo_dor_toracica = document.getElementById("dor").value;
-    
+     
     console.log({
         idade: idade,
         sexo: sexo,

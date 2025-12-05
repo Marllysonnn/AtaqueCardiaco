@@ -4,7 +4,7 @@ am5.ready(function() {
     var root = am5.Root.new("chartvenn");
   
     // Set themes
-    root.setThemes([
+    root.setThemes([ 
       am5themes_Animated.new(root)
     ]);
   
@@ -14,7 +14,7 @@ am5.ready(function() {
       height: am5.p100,
       layout: root.verticalLayout
     }));
-  
+   
     // Create venn series
     var chart = container.children.push(am5venn.Venn.new(root, {
       categoryField: "name",
