@@ -5,16 +5,22 @@ import traceback
 
 app = Flask(__name__)
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 try:
-    with open('Treinamento/data/heart_model.pkl', 'rb') as f:
+    modelo_path = os.path.join(BASE_DIR, 'Treinamento', 'data', 'heart_model.pkl')
+    with open(modelo_path, 'rb') as f:
         modelo = pickle.load(f)
 except Exception as e:
     print(f"Erro ao carregar o modelo: {e}")
     print(traceback.format_exc())
     modelo = None
 
-heart_normalizacao = pd.read_csv('Treinamento/data/base_normalizada.csv')
-heart_data = pd.read_csv('Treinamento/data/heart.csv')
+heart_normalizacao_path = os.path.join(BASE_DIR, 'Treinamento', 'data', 'base_normalizada.csv')
+heart_data_path = os.path.join(BASE_DIR, 'Treinamento', 'data', 'heart.csv')
+
+heart_normalizacao = pd.read_csv(heart_normalizacao_path)
+heart_data = pd.read_csv(heart_data_path)
 
 @app.route('/dados_ataque_cardiaco', methods=['GET'])
 def dados_ataque_cardiaco():
@@ -127,5 +133,6 @@ def dados_venn():
 def home():
     return render_template('index.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/')
+def home():
+    return render_template('index.html')

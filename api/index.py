@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+import sys
+import os
 
-app = FastAPI()
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-@app.get("/")
-def home():
-    return {"msg": "API rodando na Vercel!"}
+from app import app
+
+application = app
