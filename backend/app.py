@@ -13,7 +13,7 @@ try:
     modelo_path = os.path.join(BASE_DIR, 'Treinamento', 'data', 'heart_model.pkl')
     with open(modelo_path, 'rb') as f:
         modelo = pickle.load(f)
-except Exception as e:  
+except Exception as e:
     print(f"Erro ao carregar o modelo: {e}")
     print(traceback.format_exc())
     modelo = None
@@ -38,7 +38,7 @@ def dados_ataque_cardiaco():
 @app.route('/prever', methods=['POST'])
 def prever():
     if modelo is None:
-        return jsonify({'erro': 'Modelo n�o carregado'}), 500
+        return jsonify({'erro': 'Modelo não carregado'}), 500
 
     try:
         dados = request.json
@@ -103,6 +103,6 @@ def dados_venn():
         {"name": "Ambos", "value": (ambos / total) * 100}
     ])
 
-# ==== PORTA AUTOM�TICA DO RENDER ====
+# ==== PORTA AUTOMÁTICA DO RENDER ====
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
