@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}" />
+    <title>PAC</title>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/venn.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img
+          id="logo"
+          src="{{ url_for('static', filename='img/logonav.png') }}"
+          alt="" />
+        <a id="inicionav" href="">
+          <img
+            src="{{ url_for('static', filename='img/inicio.png') }}"
+            alt="" />
+          INICIO
+        </a>
+        <a id="graficos" href="">
+          <img
+            src="{{ url_for('static', filename='img/graficos.png') }}"
+            alt="" />
+          GRAFICOS
+        </a>
+        <a id="sobre" href="">
+          <img src="{{ url_for('static', filename='img/sobre.png') }}" alt="" />
+          SOBRE
+        </a>
+      </nav>
+    </header>
+    <section>
+      <h1>Previsão de Ataque Cardíaco</h1>
+      <div id="inicio">
+        <form id="preverForm">
+          <div>
+              <label for="idade">Idade:</label>
+              <input type="number" id="idade" name="idade" required />
+          </div>
+          <div>
+              <label for="sexo">Sexo: <span> (1 = Masculino, 0 = Feminino)</span></label>
+              <input type="number" id="sexo" name="sexo" required />
+          </div>
+          <div>
+              <label for="pressao_arterial">Pressão Arterial: <span>90~180</span></label>
+              <input type="number" id="pressao_arterial" name="pressao_arterial" required />
+          </div>
+          <div>
+              <label for="colesterol">Colesterol:<span>160~300</span></label>
+              <input type="number" id="colesterol" name="colesterol" required />
+          </div>
+          <div>
+              <label for="eletro">Eletrocardiograma: <span>90~200</span></label>
+              <input type="number" id="eletro" name="eletro" required />
+          </div>
+          <div>
+              <label for="acucar">Tipo Diabetes: <span>0 = Não tem, 1 = Tem</span></label>
+              <input type="number" id="acucar" name="acucar" required />
+          </div>
+          <div>
+              <label for="dor">Tipo de dor: <span>nível de dor(0, 1 ou 2)</span></label>
+              <input type="number" id="dor" name="dor"/>
+          </div>
+          <button type="submit">Prever</button>
+          <h2 style="display: none" id="mais">
+              Você tem <span>mais chances</span> de ter um ataque cardíaco.
+          </h2>
+          <h2 style="display: none" id="menos">
+              Você tem <span>menos chances</span> de ter um ataque cardíaco.
+          </h2>
+          <div id="resultado"></div>
+      </form>
+        <div id="chartbarra"></div>
+        <div id="chartpizza"></div>
+        <div id="chartvenn"></div>
+        <div id="chartduo"></div>
+      </div>
+    </section>
+  </body>
+  <script src="{{ url_for('static', filename='scripts/barra.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/pizza.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/venn.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/duo.js') }}"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</html>
