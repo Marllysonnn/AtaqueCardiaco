@@ -3,9 +3,12 @@ import pickle
 import pandas as pd
 import traceback
 import os
+from flask_cors import CORS
+CORS(app)
+
 
 app = Flask(__name__)
-
+    
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ==== CARREGAMENTO DO MODELO ====

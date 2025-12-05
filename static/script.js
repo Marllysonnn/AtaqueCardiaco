@@ -19,7 +19,7 @@ document.getElementById("preverForm").addEventListener("submit", async function 
         acucar_sanguineo: acucar_sanguineo,
     });
 
-    const response = await fetch("/prever", {
+    const response = await fetch("https://ataquecardiaco.onrender.com/prever", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
